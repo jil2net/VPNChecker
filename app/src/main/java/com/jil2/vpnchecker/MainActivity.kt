@@ -37,11 +37,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var btnCheck: Button
 
-    private val ipEndpoints = listOf(
-        "https://api.ipify.org",
-        "https://ifconfig.me/ip",
-        "https://icanhazip.com"
-    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -534,7 +530,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun getIpViaProxy(): String {
-        val ports = listOf(1080, 5450, 8088, 8089, 10808, 10809, 50108)
+        val ports = listOf(1080, 8088, 8089, 10808, 10809, 50108)
         for (port in ports) {
             try {
                 val proxy = java.net.Proxy(
@@ -544,8 +540,8 @@ class MainActivity : AppCompatActivity() {
 
                 val client = okhttp3.OkHttpClient.Builder()
                     .proxy(proxy)
-                    .connectTimeout(5, java.util.concurrent.TimeUnit.SECONDS)
-                    .readTimeout(5, java.util.concurrent.TimeUnit.SECONDS)
+                    .connectTimeout(3, java.util.concurrent.TimeUnit.SECONDS)
+                    .readTimeout(3, java.util.concurrent.TimeUnit.SECONDS)
                     .build()
 
                 val request = okhttp3.Request.Builder()
@@ -593,7 +589,7 @@ class MainActivity : AppCompatActivity() {
                 return "Err: Request failed"
             }
         } catch (e: Exception) {
-            // Try next port
+            return "Err: ${e.localizedMessage}"
         }
         return "Err: Server didn't respond"
     }
@@ -601,7 +597,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun scanLocalPorts(): String {
         val sb = StringBuilder("🔍 LOCAL PORT SCAN\n━━━━━━━━━━━━━━━━━━━━\n")
-        val commonPorts = listOf(80, 443, 1080, 5450, 8088, 8089, 10808, 10809, 50108)
+        val commonPorts = listOf(80, 443, 1080, 5450, 8088, 8089, 10808, 10809)
         val targets = listOf("127.0.0.1", "localhost", "0.0.0.0")
         var anyOpen = false
 

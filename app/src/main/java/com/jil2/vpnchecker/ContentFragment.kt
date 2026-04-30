@@ -18,9 +18,9 @@ class ContentFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val scroll = ScrollView(context)
-        val tv = TextView(context).apply {
-            text = arguments?.getString("content")
+        val scroll = ScrollView(requireContext())
+        val tv = TextView(requireContext()).apply {
+            text = arguments?.getString("content") ?: "No data available"
             setPadding(40, 40, 40, 40)
             textSize = 14f
             typeface = Typeface.MONOSPACE
