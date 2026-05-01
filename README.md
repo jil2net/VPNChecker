@@ -1,4 +1,5 @@
 A small Android test app that allows you to see what other apps on your device can detect about your network settings.
+Works in the background and beeps or/and vibrates each time the VPN is activated.
 
 Functionality:
 
