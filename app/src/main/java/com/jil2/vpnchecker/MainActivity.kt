@@ -207,20 +207,20 @@ class MainActivity : AppCompatActivity() {
         val sb = StringBuilder("\n⚙️ VPN SERVICES\n━━━━━━━━━━━━\n")
 
         // Part 1: Declared VPN services (works API 26+)
-        sb.append("  📦 Declared VPN services:\n")
+        sb.append("📦 Declared VPN services:\n")
         val intent = Intent(android.net.VpnService::class.java.name)
         val declared = packageManager.queryIntentServices(intent, PackageManager.GET_META_DATA)
         if (declared.isEmpty()) {
-            sb.append("    • None found\n")
+            sb.append(" • None found\n")
         } else {
             declared.forEach {
-                sb.append("    • ${it.serviceInfo.packageName}\n")
+                sb.append("  • ${it.serviceInfo.packageName}\n")
             }
         }
 
         // Part 2: Running services (only reliable on API < 26)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            sb.append("\n  🔄 Running VPN services:\n")
+            sb.append("\n🔄 Running VPN services:\n")
             val am = getSystemService(ACTIVITY_SERVICE) as ActivityManager
             @Suppress("DEPRECATION")
             val running = am.getRunningServices(100).filter {
@@ -229,12 +229,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             if (running.isEmpty()) {
-                sb.append("    • None detected\n")
+                sb.append("  • None detected\n")
             } else {
-                running.forEach { sb.append("    • ${it.service.packageName}\n") }
+                running.forEach { sb.append(" • ${it.service.packageName}\n") }
             }
         } else {
-            sb.append("\n  🔄 Running services: N/A (API 26+)\n")
+            sb.append("\n🔄 Running services: N/A (API 26+)\n")
         }
         return sb.toString()
     }
@@ -289,9 +289,6 @@ class MainActivity : AppCompatActivity() {
         // Add Capabilities
         nSb.append(capsString)
 
-        // Add VPN service check
-        nSb.append(vpnServiceString)
-
         // Add DNS info
         nSb.append(dnsString)
 
@@ -321,6 +318,10 @@ class MainActivity : AppCompatActivity() {
             val installed = try { packageManager.getPackageInfo(pkg, 0); true } catch (e: Exception) { false }
             appSb.append("$name: ${if (installed) "✅ Installed" else "❌ Not found"}\n")
         }
+
+        // Add VPN service check
+        appSb.append(vpnServiceString)
+
         sbApps = appSb.toString()
 
         // --- TAB 3: Raw Capabilities---
@@ -406,9 +407,6 @@ class MainActivity : AppCompatActivity() {
 
                 // Add Capabilities
                 finalSb.append(capsString)
-
-                // Add VPN service check
-                finalSb.append(vpnServiceString)
 
                 // Add DNS servers
                 finalSb.append(dnsString)
