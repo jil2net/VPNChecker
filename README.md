@@ -1,4 +1,4 @@
-A small android test app that allows you to see what other apps on your device can detect about your network settings.
+A small Android test app that allows you to see what other apps on your device can detect about your network settings.
 
 Functionality:
 
