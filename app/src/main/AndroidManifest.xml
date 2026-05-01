@@ -16,15 +16,6 @@
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
 
-    <queries>
-        <package android:name="com.v2ray.ang" />
-        <package android:name="com.github.shadowsocks" />
-        <package android:name="net.openvpn.openvpn" />
-        <package android:name="org.amnezia.vpn" />
-        <package android:name="com.happproxy" />
-        <package android:name="com.wireguard.android" />
-    </queries>
-
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
