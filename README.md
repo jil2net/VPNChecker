@@ -1,7 +1,7 @@
 A small Android test app that allows you to see what other apps on your device can detect about your network settings.
 Works in the background and beeps or/and vibrates each time the VPN is activated.
 
-Functionality:
+## Functionality
 
 1. Shows interfaces and their IP addresses
 2. Highlights whether a TUN, PPP, or WG interface exists in the system. Detects them in two different ways. Some apps, such as XPL-EX (XLuaPrivacy) [https://github.com/0bbedCode/XPL-EX](https://github.com/0bbedCode/XPL-EX), can spoof certain parameters but not all of them, so this app helps you verify whether spoofing is working.
